@@ -23,15 +23,18 @@ import static org.jclouds.rest.config.BinderUtils.bindClientAndAsyncClient;
 import java.util.Map;
 
 import org.jclouds.domain.Credentials;
-import org.jclouds.openstack.keystone.v2_0.AuthenticationAsyncApi;
+import org.jclouds.http.HttpRetryHandler;
+import org.jclouds.http.annotation.ClientError;
 import org.jclouds.openstack.keystone.v2_0.AuthenticationApi;
+import org.jclouds.openstack.keystone.v2_0.AuthenticationAsyncApi;
 import org.jclouds.openstack.keystone.v2_0.config.CredentialTypes;
 import org.jclouds.openstack.keystone.v2_0.config.KeystoneAuthenticationModule;
 import org.jclouds.openstack.keystone.v2_0.domain.Access;
 import org.jclouds.openstack.keystone.v2_0.functions.AuthenticatePasswordCredentials;
-import org.jclouds.rackspace.cloudidentity.v2_0.CloudIdentityAuthenticationAsyncApi;
 import org.jclouds.rackspace.cloudidentity.v2_0.CloudIdentityAuthenticationApi;
+import org.jclouds.rackspace.cloudidentity.v2_0.CloudIdentityAuthenticationAsyncApi;
 import org.jclouds.rackspace.cloudidentity.v2_0.functions.AuthenticateApiKeyCredentials;
+import org.jclouds.rackspace.handlers.RetryOnError;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableSet;
@@ -44,6 +47,12 @@ import com.google.inject.Scopes;
  * @author Adrian Cole
  */
 public class CloudIdentityAuthenticationModule extends KeystoneAuthenticationModule {
+
+   @Override
+   protected void configure() {
+      bind(HttpRetryHandler.class).annotatedWith(ClientError.class).to(RetryOnError.class);
+      bindAuthenticationApi();
+   }
 
    @Override
    protected void bindAuthenticationApi() {

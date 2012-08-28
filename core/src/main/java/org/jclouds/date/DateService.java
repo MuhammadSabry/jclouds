@@ -35,6 +35,12 @@ import com.google.inject.ImplementedBy;
 public interface DateService {
 
    Date fromSeconds(long seconds);
+   
+   /**
+    * @param date The date (UTC) to use between then and now (UTC).
+    * @return int The seconds between date and now. May be negative if now is after date.
+    */
+   int secondsBetween(Date date);
 
    String cDateFormat(Date date);
 

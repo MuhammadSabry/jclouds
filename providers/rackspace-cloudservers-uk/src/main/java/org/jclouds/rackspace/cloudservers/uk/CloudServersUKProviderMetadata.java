@@ -28,12 +28,12 @@ import java.util.Properties;
 
 import org.jclouds.openstack.keystone.v2_0.config.KeystoneAuthenticationModule.ZoneModule;
 import org.jclouds.openstack.nova.v2_0.NovaApiMetadata;
-import org.jclouds.openstack.nova.v2_0.config.NovaRestClientModule;
 import org.jclouds.providers.ProviderMetadata;
 import org.jclouds.providers.internal.BaseProviderMetadata;
 import org.jclouds.rackspace.cloudidentity.v2_0.config.CloudIdentityAuthenticationModule;
 import org.jclouds.rackspace.cloudidentity.v2_0.config.CloudIdentityCredentialTypes;
 import org.jclouds.rackspace.cloudservers.uk.config.CloudServersUKComputeServiceContextModule;
+import org.jclouds.rackspace.config.RackspaceRestClientModule;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Module;
@@ -88,7 +88,7 @@ public class CloudServersUKProviderMetadata extends BaseProviderMetadata {
                   .defaultModules(ImmutableSet.<Class<? extends Module>>builder()
                                               .add(CloudIdentityAuthenticationModule.class)
                                               .add(ZoneModule.class)
-                                              .add(NovaRestClientModule.class)
+                                              .add(RackspaceRestClientModule.class)
                                               .add(CloudServersUKComputeServiceContextModule.class).build())
                   .build())
          .homepage(URI.create("http://www.rackspace.co.uk/opencloud"))

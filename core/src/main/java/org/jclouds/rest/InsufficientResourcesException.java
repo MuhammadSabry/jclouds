@@ -27,16 +27,31 @@ public class InsufficientResourcesException extends RuntimeException {
 
    /** The serialVersionUID */
    private static final long serialVersionUID = -2272965726680821281L;
+   private String messageToUser;
 
    public InsufficientResourcesException() {
       super();
    }
 
-   public InsufficientResourcesException(String arg0, Throwable arg1) {
-      super(arg0, arg1);
+   public InsufficientResourcesException(String message, Throwable cause, String messageToUser) {
+      super(message, cause);
+      this.messageToUser = messageToUser;
    }
 
-   public InsufficientResourcesException(Throwable arg0) {
-      super(arg0);
+   public InsufficientResourcesException(String message, Throwable cause) {
+      super(message, cause);
+   }
+
+   public InsufficientResourcesException(Throwable cause) {
+      super(cause);
+   }
+   
+   public String toString() {
+      if (messageToUser == null) {
+    	  return super.toString();
+      }
+      else {
+    	  return messageToUser + "\n" + super.toString();
+      }
    }
 }

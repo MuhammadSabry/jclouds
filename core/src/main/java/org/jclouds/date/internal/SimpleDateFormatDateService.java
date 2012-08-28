@@ -72,6 +72,12 @@ public class SimpleDateFormatDateService implements DateService {
    }
 
    @Override
+   public int secondsBetween(Date date) {
+   	  return 0; // TODO: implement this :(
+   }
+
+
+   @Override
    public final String cDateFormat(Date date) {
       synchronized (cSimpleDateFormat) {
          return cSimpleDateFormat.format(date);

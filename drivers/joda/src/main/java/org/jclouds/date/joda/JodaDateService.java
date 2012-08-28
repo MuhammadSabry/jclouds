@@ -30,6 +30,7 @@ import javax.inject.Singleton;
 import org.jclouds.date.DateService;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.Seconds;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -58,6 +59,14 @@ public class JodaDateService implements DateService {
 
    public final Date fromSeconds(long seconds) {
       return new Date(seconds * 1000);
+   }
+
+   @Override
+   public int secondsBetween(Date date) {
+   	  DateTime now = DateTime.now(DateTimeZone.UTC);
+   	  DateTime then = new DateTime(date);
+   	  
+      return Seconds.secondsBetween(now, then).getSeconds();
    }
 
    public final String cDateFormat(Date dateTime) {
