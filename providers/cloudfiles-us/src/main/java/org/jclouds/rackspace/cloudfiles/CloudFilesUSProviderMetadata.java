@@ -18,6 +18,8 @@
  */
 package org.jclouds.rackspace.cloudfiles;
 
+import static org.jclouds.location.reference.LocationConstants.ISO3166_CODES;
+import static org.jclouds.location.reference.LocationConstants.PROPERTY_REGION;
 import static org.jclouds.location.reference.LocationConstants.PROPERTY_REGIONS;
 
 import java.net.URI;
@@ -56,7 +58,9 @@ public class CloudFilesUSProviderMetadata extends BaseProviderMetadata {
 
    public static Properties defaultProperties() {
       Properties properties = new Properties();
-      properties.setProperty(PROPERTY_REGIONS, "US");
+      properties.setProperty(PROPERTY_REGIONS, "DFW, ORD");
+      properties.setProperty(PROPERTY_REGION + ".DFW." + ISO3166_CODES, "US-TX");
+      properties.setProperty(PROPERTY_REGION + ".ORD." + ISO3166_CODES, "US-IL");
       return properties;
    }
    
@@ -70,7 +74,8 @@ public class CloudFilesUSProviderMetadata extends BaseProviderMetadata {
          .homepage(URI.create("http://www.rackspace.com/cloud/cloud_hosting_products/files"))
          .console(URI.create("https://manage.rackspacecloud.com"))
          .linkedServices("cloudfiles-us", "cloudservers-us", "cloudloadbalancers-us")
-         .iso3166Codes("US-IL","US-TX");
+         .iso3166Codes("US-IL","US-TX")
+         .defaultProperties(CloudFilesUSProviderMetadata.defaultProperties());
       }
 
       @Override

@@ -1,0 +1,85 @@
+{
+  "auth": {
+    "token": {
+      "id": "118fb907-0786-4799-88f0-9a5b7963d1ab",
+      "expires": "2012-08-30T15:34:41.000-05:00"
+    },
+    "serviceCatalog": {
+      "cloudServersOpenStack": [
+        {
+          "region": "DFW",
+          "publicURL": "https:\/\/dfw.servers.api.rackspacecloud.com\/v2\/123123",
+          "v1Default": true
+        },
+        {
+          "region": "ORD",
+          "publicURL": "https:\/\/ord.servers.api.rackspacecloud.com\/v2\/123123"
+        }
+      ],
+      "cloudDNS": [
+        {
+          "publicURL": "https:\/\/dns.api.rackspacecloud.com\/v1.0\/123123",
+          "v1Default": true
+        }
+      ],
+      "cloudFilesCDN": [
+        {
+          "region": "DFW",
+          "publicURL": "https:\/\/cdn1.clouddrive.com\/v1\/MossoCloudFS_xxx",
+          "v1Default": true
+        },
+        {
+          "region": "ORD",
+          "publicURL": "https:\/\/cdn2.clouddrive.com\/v1\/MossoCloudFS_xxx"
+        }
+      ],
+      "cloudFiles": [
+        {
+          "region": "DFW",
+          "publicURL": "https:\/\/storage101.dfw1.clouddrive.com\/v1\/MossoCloudFS_xxx",
+          "v1Default": true,
+          "internalURL": "https:\/\/snet-storage101.dfw1.clouddrive.com\/v1\/MossoCloudFS_xxx"
+        },
+        {
+          "region": "ORD",
+          "publicURL": "https:\/\/storage101.ord1.clouddrive.com\/v1\/MossoCloudFS_xxx",
+          "internalURL": "https:\/\/snet-storage101.ord1.clouddrive.com\/v1\/MossoCloudFS_xxx"
+        }
+      ],
+      "cloudMonitoring": [
+        {
+          "publicURL": "https:\/\/monitoring.api.rackspacecloud.com\/v1.0\/123123",
+          "v1Default": true
+        }
+      ],
+      "cloudLoadBalancers": [
+        {
+          "region": "ORD",
+          "publicURL": "https:\/\/ord.loadbalancers.api.rackspacecloud.com\/v1.0\/123123",
+          "v1Default": true
+        },
+        {
+          "region": "DFW",
+          "publicURL": "https:\/\/dfw.loadbalancers.api.rackspacecloud.com\/v1.0\/123123"
+        }
+      ],
+      "cloudDatabases": [
+        {
+          "region": "DFW",
+          "publicURL": "https:\/\/dfw.databases.api.rackspacecloud.com\/v1.0\/123123",
+          "v1Default": true
+        },
+        {
+          "region": "ORD",
+          "publicURL": "https:\/\/ord.databases.api.rackspacecloud.com\/v1.0\/123123"
+        }
+      ],
+      "cloudServers": [
+        {
+          "publicURL": "https:\/\/servers.api.rackspacecloud.com\/v1.0\/123123",
+          "v1Default": true
+        }
+      ]
+    }
+  }
+}

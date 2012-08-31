@@ -38,7 +38,7 @@ public class RetryOnRenewExpectTest extends BaseCloudServersRestClientExpectTest
    public void testShouldReauthenticateOn401() {
 
       HttpRequest deleteImage = HttpRequest.builder().method("DELETE")
-            .endpoint("https://lon.servers.api.rackspacecloud.com/v1.0/10001786/images/11?now=1257695648897")
+            .endpoint("https://servers.api.rackspacecloud.com/v1.0/123123/images/11?now=1257695648897")
             .addHeader("X-Auth-Token", authToken).build();
 
       HttpResponse pleaseRenew = HttpResponse
@@ -58,7 +58,7 @@ public class RetryOnRenewExpectTest extends BaseCloudServersRestClientExpectTest
                                                        .build();
 
       HttpRequest deleteImage2 = HttpRequest.builder().method("DELETE")
-            .endpoint("https://lon.servers.api.rackspacecloud.com/v1.0/10001786/images/11?now=1257695648897")
+            .endpoint("https://servers.api.rackspacecloud.com/v1.0/123123/images/11?now=1257695648897")
             .addHeader("X-Auth-Token", authToken2).build();
 
       HttpResponse imageDeleted = HttpResponse.builder().statusCode(204).message("HTTP/1.1 204 No Content").build();
@@ -72,7 +72,7 @@ public class RetryOnRenewExpectTest extends BaseCloudServersRestClientExpectTest
    @Test(expectedExceptions = AuthorizationException.class)
    public void testDoesNotReauthenticateOnFatal401() {
       HttpRequest deleteImage = HttpRequest.builder().method("DELETE")
-            .endpoint("https://lon.servers.api.rackspacecloud.com/v1.0/10001786/images/11?now=1257695648897")
+            .endpoint("https://servers.api.rackspacecloud.com/v1.0/123123/images/11?now=1257695648897")
             .addHeader("X-Auth-Token", authToken).build();
 
       HttpResponse unauthResponse = HttpResponse

@@ -21,6 +21,7 @@ package org.jclouds.openstack.keystone.v1_1.suppliers;
 import static org.testng.Assert.assertEquals;
 
 import java.net.URI;
+import java.util.Map;
 
 import javax.inject.Singleton;
 
@@ -28,6 +29,7 @@ import org.jclouds.location.Provider;
 import org.jclouds.location.suppliers.RegionIdToURISupplier;
 import org.jclouds.openstack.keystone.v1_1.domain.Auth;
 import org.jclouds.openstack.keystone.v1_1.parse.ParseAuthTest;
+import org.jclouds.openstack.keystone.v1_1.parse.ParseAuthWithMultipleRegionsTest;
 import org.testng.annotations.Test;
 
 import com.google.common.base.Supplier;
@@ -61,9 +63,10 @@ public class RegionIdToURIFromAuthForServiceSupplierTest {
    }).getInstance(RegionIdToURISupplier.Factory.class);
 
    public void testRegionMatches() {
-      assertEquals(Maps.transformValues(factory.createForApiTypeAndVersion("cloudFilesCDN", "1.0").get(), Suppliers
-               .<URI> supplierFunction()), ImmutableMap.of("LON", URI
-               .create("https://cdn3.clouddrive.com/v1/MossoCloudFS_83a9d536-2e25-4166-bd3b-a503a934f953")));
+      Map<String, URI> actual = Maps.transformValues(factory.createForApiTypeAndVersion("cloudFilesCDN", "1.0").get(), Suppliers.<URI> supplierFunction());
+      ImmutableMap<String, URI> expected = ImmutableMap.of("LON", URI.create("https://cdn3.clouddrive.com/v1/MossoCloudFS_83a9d536-2e25-4166-bd3b-a503a934f953"));
+	   
+      assertEquals(actual, expected);
    }
 
    public void testTakesFirstPartOfDNSWhenNoRegion() {

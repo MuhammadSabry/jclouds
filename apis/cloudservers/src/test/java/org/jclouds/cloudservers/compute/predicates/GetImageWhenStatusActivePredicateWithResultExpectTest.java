@@ -50,7 +50,7 @@ public class GetImageWhenStatusActivePredicateWithResultExpectTest extends
             .builder()
             .method("GET")
             .endpoint(
-                     URI.create("https://lon.servers.api.rackspacecloud.com/v1.0/10001786/images/detail?format=json&now=1257695648897"))
+                     URI.create("https://servers.api.rackspacecloud.com/v1.0/123123/images/detail?format=json&now=1257695648897"))
             .headers(ImmutableMultimap.<String, String> builder()
                      .put(HttpHeaders.ACCEPT, "application/json")
                      .put("X-Auth-Token", authToken).build()).build();

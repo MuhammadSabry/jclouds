@@ -50,7 +50,7 @@ public class BaseKeystoneRestClientExpectTest<S> extends BaseRestClientExpectTes
    protected String authToken = "118fb907-0786-4799-88f0-9a5b7963d1ab";
 
    protected HttpResponse responseWithAuth = HttpResponse.builder().statusCode(200).message("HTTP/1.1 200")
-         .payload(payloadFromResourceWithContentType("/auth1_1.json", "application/json")).build();
+         .payload(payloadFromResourceWithContentType("/auth1_1-multistorage.json", "application/json")).build();
 
    /**
     * in case you need to override anything
