@@ -45,6 +45,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class RetryOnError extends RetryOnRenew {
+	private static final String RETRY_AFTER = "retryAfter";
 	
 	private Utils utils;
 	private ProviderMetadata providerMetadata;
@@ -60,7 +61,7 @@ public class RetryOnError extends RetryOnRenew {
 	public boolean shouldRetryRequest(HttpCommand command, HttpResponse response) {
 		boolean retry = super.shouldRetryRequest(command, response);
 		
-		System.out.println("retry: " + retry);
+		System.err.println("retry: " + retry);
 		
 		if (retry) {
 			return retry;
@@ -68,23 +69,23 @@ public class RetryOnError extends RetryOnRenew {
 		else {
 			String content = new String(closeClientButKeepContentStream(response));
 			
-			if (response.getStatusCode() == 413 && content.contains("retryAfter")) { // TODO: constantify
+			if (response.getStatusCode() == 413 && content.contains(RETRY_AFTER)) {
 				Json json = utils.getJson();
 				Map<String, Map<String, String>> map = json.fromJson(content, 
 					new TypeToken<Map<String, Map<String, String>>>() {}.getType());
-				String retryAfterStr = map.get("overLimit").get("retryAfter");
 				
-				// TODO: fix this after the retryAfter/retryAt and the UTC/Z bugs are resolved
-				retryAfterStr = retryAfterStr.substring(0, retryAfterStr.indexOf("UTC")) + "Z";
+				// TODO: fix these after the retryAfter/retryAt and the UTC/Z bugs are resolved
+				String retryDateTimeStr = map.get("overLimit").get(RETRY_AFTER);
+				retryDateTimeStr = retryDateTimeStr.replace("UTC", "Z");
 				
-				System.out.println("retryAfterStr = " + retryAfterStr);
+				System.err.println("retryDateTimeStr = " + retryDateTimeStr);
 				
 				DateService dateService = utils.getDateService();
-				int secondsBetween = dateService.secondsBetween(dateService.iso8601SecondsDateParse(retryAfterStr));
+				int secondsBetween = dateService.secondsBetween(dateService.iso8601SecondsDateParse(retryDateTimeStr));
 				
 				// TODO: use secondsBetween and a property to find out whether to wait and retry or throw an exception
-				System.out.println("secondsBetween = " + secondsBetween);
-				System.out.println(providerMetadata.getDefaultProperties());
+				System.err.println("secondsBetween = " + secondsBetween);
+				System.err.println(providerMetadata.getDefaultProperties().get("foo"));
 			}
 
 			return retry;

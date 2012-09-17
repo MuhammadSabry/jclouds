@@ -39,7 +39,7 @@ public class RackspaceErrorHandler extends NovaErrorHandler {
       super.handleError(command, response);
       
       if (response.getStatusCode() == 413) {          
-         String messageToUser = "You have exceeded a rate limit. For more detail on how to resolve limit errors, please see [URL]"; // TODO: add URL
+         String messageToUser = "You have exceeded a rate limit. For more detail on how to resolve limit errors, please see http://rax.io/limits";
          Exception exception = command.getException(); 
          
          command.setException(new InsufficientResourcesException(exception.getMessage(), exception.getCause(), messageToUser));
